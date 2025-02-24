@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, Hash, Users } from 'lucide-react';
+<<<<<<< HEAD
+=======
+import { createClient } from '@supabase/supabase-js';
+>>>>>>> 85541e8 (p2)
 
 const groups = [
   { id: 1, name: 'Web Development', type: 'study' },
@@ -23,10 +27,17 @@ const messages = [
   },
 ];
 
+<<<<<<< HEAD
+=======
+// Initialize Supabase client
+const supabase = createClient('https://supabase.com/dashboard/project/wstexwfbbbkoxmvgnjft', 'YOUR_SUPABASE_ANON_KEY');
+
+>>>>>>> 85541e8 (p2)
 export function ChatInterface() {
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState(messages);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+<<<<<<< HEAD
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +49,24 @@ export function ChatInterface() {
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Format timestamp
       };
       setChatMessages([...chatMessages, newMessage]);
+=======
+  const [groups, setGroups] = useState(groups);
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (user && message.trim()) {
+      const newMessage = {
+        sender: user.email, // Assuming user has an email
+        content: message,
+        timestamp: new Date().toISOString(),
+      };
+      const { error } = await supabase.from('messages').insert([newMessage]);
+      if (error) {
+        console.error('Error sending message:', error);
+        return;
+      }
+      setChatMessages((prevMessages) => [...prevMessages, { ...newMessage, id: Date.now() }]);
+>>>>>>> 85541e8 (p2)
       setMessage('');
     }
   };
@@ -49,6 +78,22 @@ export function ChatInterface() {
     }
   }, [chatMessages]);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    const subscription = supabase
+      .from('messages')
+      .on('INSERT', (payload) => {
+        setChatMessages((prevMessages) => [...prevMessages, payload.new]);
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeSubscription(subscription);
+    };
+  }, []);
+
+>>>>>>> 85541e8 (p2)
   return (
     <div className="h-[calc(100vh-2rem)] flex">
       {/* Sidebar */}

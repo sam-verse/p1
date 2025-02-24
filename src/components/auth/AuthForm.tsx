@@ -39,12 +39,29 @@ export function AuthForm() {
       }
       navigate('/dashboard');
     } catch (err) {
+<<<<<<< HEAD
       setError(err instanceof Error ? err.message : 'An error occurred');
+=======
+      console.error('Auth error:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred during authentication');
+>>>>>>> 85541e8 (p2)
     } finally {
       setLoading(false);
     }
   };
 
+<<<<<<< HEAD
+=======
+  const departments = [
+    'Computer Science',
+    'Information Technology',
+    'Electronics and Communication',
+    'Electrical and Electronics',
+    'Mechanical',
+    'Civil',
+  ];
+
+>>>>>>> 85541e8 (p2)
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary via-primary-orange to-primary-yellow flex items-center justify-center p-4">
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
@@ -107,16 +124,29 @@ export function AuthForm() {
                 }
                 required
               />
+<<<<<<< HEAD
               <input
                 type="text"
                 placeholder="Department"
+=======
+              <select
+>>>>>>> 85541e8 (p2)
                 className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary"
                 value={formData.department}
                 onChange={(e) =>
                   setFormData({ ...formData, department: e.target.value })
                 }
                 required
+<<<<<<< HEAD
               />
+=======
+              >
+                <option value="">Select Department</option>
+                {departments.map((dept) => (
+                  <option key={dept} value={dept}>{dept}</option>
+                ))}
+              </select>
+>>>>>>> 85541e8 (p2)
               <textarea
                 placeholder="Interests (comma separated)"
                 className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary"
